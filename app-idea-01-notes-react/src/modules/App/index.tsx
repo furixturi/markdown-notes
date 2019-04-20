@@ -7,9 +7,15 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <header className={styles.AppHeader}>
-          <img src={logo} className={styles.AppLogo} alt="logo" />
+          <h2>Welcome to React</h2>
+          <img
+            src={logo}
+            className={styles.AppLogo}
+            alt="logo"
+          />
           <p>
-            Edit <code>src/App.tsx</code> and save to reload.
+            Edit <code>src/App.tsx</code> and save to
+            reload.
           </p>
           <a
             className={styles.AppLink}
@@ -24,6 +30,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
