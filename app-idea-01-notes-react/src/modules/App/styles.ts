@@ -8,10 +8,6 @@ const styles = (theme: Theme) =>
       backgroundColor: '#ffffff'
     },
 
-    h1: {
-      fontWeight: 500
-    },
-
     AppLogo: {
       animation: 'App-logo-spin infinite 5s linear',
       height: '1em',

@@ -1,16 +1,12 @@
+import { Fab, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 import React, { Component } from 'react';
 import logo from '../../assets/logo.svg';
-import styles from './styles';
 import theme from '../../styles-theme/theme';
-import Typography from '@material-ui/core/Typography';
-import {
-  MuiThemeProvider,
-  WithStyles,
-  withStyles,
-  Fab
-} from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import styles from './styles';
+import Note from '../Note';
 
 interface Props extends WithStyles<typeof styles> {}
 class App extends Component<Props> {
@@ -23,9 +19,8 @@ class App extends Component<Props> {
           <CssBaseline />
           <header className={classes.AppHeader}>
             <Typography
-              className={classes.h1}
               component="h1"
-              variant="h2"
+              variant="h3"
               gutterBottom
             >
               Markdown Notes - React
@@ -45,11 +40,13 @@ class App extends Component<Props> {
               <AddIcon />
             </Fab>
           </div>
+          <div>
+            <Note></Note>
+          </div>
         </div>
       </MuiThemeProvider>
     );
   }
 }
-
 
 export default withStyles(styles)(App);
