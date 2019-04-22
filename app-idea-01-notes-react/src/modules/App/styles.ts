@@ -24,8 +24,6 @@ const styles = (theme: Theme) =>
       color: theme.palette.primary.main
     },
 
-    fab: {},
-
     '@keyframes App-logo-spin': {
       from: {
         transform: 'rotate(0deg)'

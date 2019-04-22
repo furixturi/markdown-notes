@@ -1,4 +1,9 @@
-import { Fab, MuiThemeProvider, WithStyles, withStyles } from '@material-ui/core';
+import {
+  Fab,
+  MuiThemeProvider,
+  WithStyles,
+  withStyles
+} from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
@@ -37,12 +42,17 @@ function App(props: Props) {
               .concat(notes.slice(i + 1))
           );
         }}
+        onDelete={deleteNote}
       />
     ));
-  
-    const addNewNote = () => {
-      setNotes(['Click to edit'].concat(notes));
-    }
+
+  const addNewNote = () => {
+    setNotes(['Click to edit'].concat(notes));
+  };
+
+  const deleteNote = (idx: number) => {
+    setNotes(notes.slice(0, idx).concat(notes.slice(idx+1)))
+  }
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(notes));
@@ -70,7 +80,6 @@ function App(props: Props) {
           <Fab
             color="primary"
             aria-label="Add"
-            className={classes.fab}
             onClick={addNewNote}
           >
             <AddIcon />

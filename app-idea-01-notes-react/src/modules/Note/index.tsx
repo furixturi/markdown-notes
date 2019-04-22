@@ -3,8 +3,10 @@ import {
   TextField,
   Typography,
   WithStyles,
-  withStyles
+  withStyles,
+  Fab
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from './styles';
@@ -12,12 +14,13 @@ import styles from './styles';
 interface Props extends WithStyles<typeof styles> {
   index: number;
   sourceText?: string;
-  onSave: (key: number, value: string) => void; 
+  onSave: (key: number, value: string) => void;
+  onDelete: (key: number) => void;
 }
 
 function Note(props: Props) {
   const { classes, sourceText } = props;
-  
+
   const [mdNoteSrc, setMdNoteSrc] = useState(
     props.sourceText ? props.sourceText : 'Click to edit'
   );
@@ -25,6 +28,15 @@ function Note(props: Props) {
 
   return (
     <Card className={classes.Card}>
+      <Fab
+        color="secondary"
+        aria-label="Delete"
+        onClick={() => {
+          props.onDelete(props.index);
+        }}
+      >
+        <DeleteIcon />
+      </Fab>
       {!editing && (
         <Typography
           component="div"
@@ -45,9 +57,8 @@ function Note(props: Props) {
             setMdNoteSrc(e.target.value);
           }}
           onBlur={() => {
-            console.log('DEBUG: onBlur, mdNoteSrc:', mdNoteSrc)
             setEditing(false);
-            props.onSave(props.index, mdNoteSrc)
+            props.onSave(props.index, mdNoteSrc);
           }}
         />
       )}
