@@ -39,6 +39,10 @@ function App(props: Props) {
         }}
       />
     ));
+  
+    const addNewNote = () => {
+      setNotes(['Click to edit'].concat(notes));
+    }
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(notes));
@@ -67,6 +71,7 @@ function App(props: Props) {
             color="primary"
             aria-label="Add"
             className={classes.fab}
+            onClick={addNewNote}
           >
             <AddIcon />
           </Fab>
