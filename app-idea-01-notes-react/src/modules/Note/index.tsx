@@ -1,11 +1,12 @@
 import {
   Card,
+  TextField,
   Typography,
   WithStyles,
-  withStyles,
-  TextField
+  withStyles
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import styles from './styles';
 
 interface Props extends WithStyles<typeof styles> {}
@@ -25,9 +26,11 @@ function Note(props: Props) {
         <Typography
           variant="body1"
           gutterBottom
-          onClick={() => setEditing(true)}
+          onClick={() => {
+            setEditing(true);
+          }}
         >
-          {mdNoteSrc}
+          <ReactMarkdown source={mdNoteSrc} />
         </Typography>
       )}
       {editing && (
