@@ -10,7 +10,9 @@ import ReactMarkdown from 'react-markdown';
 import styles from './styles';
 
 interface Props extends WithStyles<typeof styles> {
+  index: number;
   sourceText?: string;
+  onSave: (key: number, value: string) => void; 
 }
 
 function Note(props: Props) {
@@ -25,6 +27,7 @@ function Note(props: Props) {
     <Card className={classes.Card}>
       {!editing && (
         <Typography
+          component="div"
           variant="body1"
           gutterBottom
           onClick={() => {
@@ -42,7 +45,9 @@ function Note(props: Props) {
             setMdNoteSrc(e.target.value);
           }}
           onBlur={() => {
+            console.log('DEBUG: onBlur, mdNoteSrc:', mdNoteSrc)
             setEditing(false);
+            props.onSave(props.index, mdNoteSrc)
           }}
         />
       )}
