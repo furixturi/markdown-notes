@@ -9,16 +9,17 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from './styles';
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  sourceText?: string;
+}
 
 function Note(props: Props) {
+  const { classes, sourceText } = props;
+  
   const [mdNoteSrc, setMdNoteSrc] = useState(
-    'Click to start writing'
+    props.sourceText ? props.sourceText : 'Click to edit'
   );
-
   const [editing, setEditing] = useState(false);
-
-  const { classes } = props;
 
   return (
     <Card className={classes.Card}>
