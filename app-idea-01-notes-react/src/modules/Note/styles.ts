@@ -2,9 +2,17 @@ import theme from '../../styles-theme/theme';
 import { Theme, createStyles } from '@material-ui/core';
 
 const styles = (theme: Theme) => createStyles({
-  Card: {
+  Note: {
     minWidth: 275,
-    maxWidth: 640
+    maxWidth: 640,
+    margin: '15px auto',
+    padding: '30px 15px'
+  },
+  header: {
+    display: 'flex',
+  },
+  createdAt: {
+    
   }
 });
 
