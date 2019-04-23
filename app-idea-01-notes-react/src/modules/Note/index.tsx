@@ -7,36 +7,61 @@ import {
   Fab
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from './styles';
+import NoteData from '../../models/NoteData';
 
 interface Props extends WithStyles<typeof styles> {
   index: number;
-  sourceText?: string;
-  onSave: (key: number, value: string) => void;
-  onDelete: (key: number) => void;
+  noteData: NoteData;
+  onSave: (idx: number, note: NoteData) => void;
+  onDelete: (idx: number) => void;
 }
 
 function Note(props: Props) {
-  const { classes, sourceText } = props;
+  const { classes, noteData, index } = props;
 
-  const [mdNoteSrc, setMdNoteSrc] = useState(
-    props.sourceText ? props.sourceText : 'Click to edit'
-  );
-  const [editing, setEditing] = useState(false);
+  const [note, setNote] = useState(noteData);
+
+  const [editing, setEditing] = useState();
+
+  useEffect(() => {
+    if(editing === false) {
+      props.onSave(index, note);
+    }
+  })
 
   return (
-    <Card className={classes.Card}>
-      <Fab
-        color="secondary"
-        aria-label="Delete"
-        onClick={() => {
-          props.onDelete(props.index);
-        }}
-      >
-        <DeleteIcon />
-      </Fab>
+    <Card className={classes.Note}>
+      <header className={classes.header}>
+        <div className={classes.createdAt}>
+          <Typography
+            component="div"
+            variant="body1"
+            gutterBottom
+          >
+            {new Date(note.createdAt).toLocaleString()}
+          </Typography>
+          <Typography
+            component="div"
+            variant="body1"
+            gutterBottom
+          >
+            {new Date(note.updatedAt).toLocaleString()}
+          </Typography>
+        </div>
+        <Fab
+          color="secondary"
+          aria-label="Delete"
+          onClick={() => {
+            props.onDelete(props.index);
+          }}
+        >
+          <DeleteIcon />
+        </Fab>
+      </header>
+
       {!editing && (
         <Typography
           component="div"
@@ -46,19 +71,27 @@ function Note(props: Props) {
             setEditing(true);
           }}
         >
-          <ReactMarkdown source={mdNoteSrc} />
+          <ReactMarkdown source={note.mdText} />
         </Typography>
       )}
       {editing && (
         <TextField
           multiline
-          value={mdNoteSrc}
+          value={note.mdText}
           onChange={e => {
-            setMdNoteSrc(e.target.value);
+            const mdText = e.target.value;
+            setNote(prevNote => ({
+              ...prevNote,
+              mdText
+            }));
           }}
           onBlur={() => {
+            const updatedAt = new Date();
+            setNote(prevNote => ({
+              ...prevNote,
+              updatedAt
+            }));
             setEditing(false);
-            props.onSave(props.index, mdNoteSrc);
           }}
         />
       )}
