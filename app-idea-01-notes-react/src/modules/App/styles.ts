@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       backgroundColor: '#ffffff'
     },
 
-    AppLogo: {
+    logo: {
       animation: 'App-logo-spin infinite 5s linear',
       height: '1em',
       pointerEvents: 'none',
@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
       verticalAlign: 'middle'
     },
 
-    AppHeader: {
+    header: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

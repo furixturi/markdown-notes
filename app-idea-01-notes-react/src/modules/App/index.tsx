@@ -78,9 +78,10 @@ function App(props: Props) {
 
   return (
     <MuiThemeProvider theme={theme}>
+    <CssBaseline />
       <div className={classes.App}>
-        <CssBaseline />
-        <header className={classes.AppHeader}>
+        
+        <header className={classes.header}>
           <Typography
             component="h1"
             variant="h3"
@@ -89,7 +90,7 @@ function App(props: Props) {
             Markdown Notes - React
             <img
               src={logo}
-              className={classes.AppLogo}
+              className={classes.logo}
               alt="logo"
             />
           </Typography>
